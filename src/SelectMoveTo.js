@@ -4,16 +4,26 @@ import Shelfs from './Shelfs'
 
 class SelectMoveTo extends Component {
   static propTypes = {
-    currentCategory: PropTypes.string.isRequired
+    currentCategory: PropTypes.string.isRequired,
+    book: PropTypes.object.isRequired,
+    onMoveBook: PropTypes.func.isRequired
   }
 
   render() {
-    const { currentCategory } = this.props
+    const { currentCategory, book, onMoveBook } = this.props
     return(
-      <select>
-        <option value="none" disabled>Move to...</option>
+      <select
+        autofocus
+        onChange={(event) => onMoveBook(book, event.target.value)}
+      >
+        <option value="none" disabled selected>Move to...</option>
         {Shelfs.filter((shelf) => shelf.type !== currentCategory).map(shelf => (
-          <option key={shelf.id} value={shelf.type}>{shelf.title}</option>
+          <option
+            key={shelf.id}
+            value={shelf.type}
+          >
+            {shelf.title}
+          </option>
         ))}
         <option value="none">None</option>
       </select>

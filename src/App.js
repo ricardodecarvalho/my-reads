@@ -11,8 +11,17 @@ class App extends Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState({ books })
-      this.setState({ loading: false })
+      this.setState({ books, loading: false })
+    })
+  }
+
+  moveBook = (book, newShelf) => {
+    this.setState({ loading: true })
+    BooksAPI.update(book, newShelf).then(() => {
+      book.shelf = newShelf
+      let updateLocalBookList = this.state.books.filter( b => b.id !== book.id )
+      updateLocalBookList.push(book);
+      this.setState({ books: updateLocalBookList, loading: false })
     })
   }
 
@@ -22,6 +31,7 @@ class App extends Component {
         <ListBooks
           books={this.state.books}
           loading={this.state.loading}
+          onMoveBook={this.moveBook}
         />
       </div>
     );
