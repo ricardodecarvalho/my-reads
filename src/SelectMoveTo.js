@@ -7,10 +7,6 @@ class SelectMoveTo extends Component {
     currentCategory: PropTypes.string.isRequired
   }
 
-  removeContact = (currentCategory) => {
-    Shelfs: Shelfs.filter((c) => c.type !== currentCategory)
-  }
-
   render() {
     const { currentCategory } = this.props
     return(
