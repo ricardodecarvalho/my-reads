@@ -5,12 +5,14 @@ import * as BooksAPI from './utils/BooksAPI'
 
 class App extends Component {
   state = {
-    books: []
+    books: [],
+    loading: true
   }
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
+      this.setState({ loading: false })
     })
   }
 
@@ -19,6 +21,7 @@ class App extends Component {
       <div className="app">
         <ListBooks
           books={this.state.books}
+          loading={this.state.loading}
         />
       </div>
     );

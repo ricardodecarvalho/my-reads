@@ -8,11 +8,12 @@ import shelfs from './Shelfs'
 
 class ListBooks extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired
   }
 
   render() {
-    const { books } = this.props
+    const { books, loading } = this.props
 
     let showingBooks
     showingBooks = books
@@ -27,6 +28,7 @@ class ListBooks extends Component {
               title={shelf.title}
               books={books.filter( book => book.shelf === shelf.type)}
               key={shelf.id}
+              loading={loading}
             />
           ))}
         </div>
