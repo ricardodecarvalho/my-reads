@@ -5,6 +5,7 @@ import sortBy from 'sort-by'
 import HeaderTitle from './HeaderTitle'
 import BookShelf from './BookShelf'
 import shelfs from './Shelfs'
+import ButtonSearch from './ButtonSearch'
 
 class ListBooks extends Component {
   static propTypes = {
@@ -34,6 +35,7 @@ class ListBooks extends Component {
             />
           ))}
         </div>
+        <ButtonSearch />
       </div>
     )
   }
