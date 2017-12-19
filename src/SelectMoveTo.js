@@ -13,7 +13,6 @@ class SelectMoveTo extends Component {
     const { currentCategory, book, onMoveBook } = this.props
     return(
       <select
-        autofocus
         onChange={(event) => onMoveBook(book, event.target.value)}
       >
         <option value="none" disabled selected>Move to...</option>
