@@ -1,33 +1,47 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import Shelfs from './Shelfs'
 
 class SelectMoveTo extends Component {
-  static propTypes = {
-    currentCategory: PropTypes.string.isRequired,
-    book: PropTypes.object.isRequired,
-    onMoveBook: PropTypes.func.isRequired
-  }
+    static propTypes = {
+        currentCategory: PropTypes.string,
+        book: PropTypes.object.isRequired,
+        books: PropTypes.array.isRequired,
+        onMoveBook: PropTypes.func.isRequired
+    }
 
-  render() {
-    const { currentCategory, book, onMoveBook } = this.props
-    return(
-      <select
-        onChange={(event) => onMoveBook(book, event.target.value)}
-      >
-        <option value="none" disabled selected>Move to...</option>
-        {Shelfs.filter((shelf) => shelf.type !== currentCategory).map(shelf => (
-          <option
-            key={shelf.id}
-            value={shelf.type}
-          >
-            {shelf.title}
-          </option>
-        ))}
-        <option value="none">None</option>
-      </select>
-    )
-  }
+    render() {
+        const {currentCategory, book, books, onMoveBook} = this.props
+
+        let current = currentCategory
+
+        if (!current) {
+            for (let item of books ) {
+                if (item.id === book.id)  {
+                    current = item.shelf
+                    break
+                }
+            }
+        }
+
+        return (
+            <select
+                onChange={(event) => onMoveBook(book, event.target.value)}
+                value="none"
+            >
+                <option value="none" disabled>Move to...</option>
+                {Shelfs.filter((shelf) => shelf.type !== current).map(shelf => (
+                    <option
+                        key={shelf.id}
+                        value={shelf.type}
+                    >
+                        {shelf.title}
+                    </option>
+                ))}
+                <option value="none">None</option>
+            </select>
+        )
+    }
 }
 
 export default SelectMoveTo
