@@ -14,6 +14,7 @@ The project uses Node.js and the create-react-app starter.
 Once Node is installed, navigate to the directory where you want to store the app
 ```
 git clone git@github.com:ricardodecarvalho/my-reads.git
+cd my-reads
 yarn install
 ```
 Once all of the dependencies have been installed you can launch the app with
