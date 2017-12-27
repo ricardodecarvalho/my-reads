@@ -1,41 +1,35 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Book from './Book'
 
-class BookShelf extends Component {
-    static propTypes = {
-        books: PropTypes.array.isRequired,
-        title: PropTypes.string.isRequired,
-        loading: PropTypes.bool.isRequired,
-        onMoveBook: PropTypes.func.isRequired
-    }
-
-    render() {
-        const {books, title, loading, onMoveBook} = this.props
-
-        return (
-            <div className="bookshelf">
-                <h2 className="bookshelf-title">{title}</h2>
-                <div className="bookshelf-books">
-                    {loading === true && (
-                        <div className='loading'>
-                            <span>Loading...</span>
-                        </div>
-                    )}
-                    <ol className="books-grid">
-                        {books.map((book) => (
-                            <Book
-                                books={books}
-                                book={book}
-                                key={book.id}
-                                onMoveBook={onMoveBook}
-                            />
-                        ))}
-                    </ol>
+const BookShelf = (props) => (
+    <div className="bookshelf">
+        <h2 className="bookshelf-title">{props.title}</h2>
+        <div className="bookshelf-books">
+            {props.loading === true && (
+                <div className='loading'>
+                    <span>Loading...</span>
                 </div>
-            </div>
-        )
-    }
+            )}
+            <ol className="books-grid">
+                {props.books.map((book) => (
+                    <Book
+                        books={props.books}
+                        book={book}
+                        key={book.id}
+                        onMoveBook={props.onMoveBook}
+                    />
+                ))}
+            </ol>
+        </div>
+    </div>
+)
+
+BookShelf.propTypes = {
+    books: PropTypes.array.isRequired,
+    title: PropTypes.string.isRequired,
+    loading: PropTypes.bool.isRequired,
+    onMoveBook: PropTypes.func.isRequired
 }
 
 export default BookShelf
