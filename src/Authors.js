@@ -1,22 +1,16 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-class Authors extends Component {
-    static propTypes = {
-        authors: PropTypes.array.isRequired
-    }
+const Authors = (props) => (
+    <div className="book-authors">
+        {props.authors.map(
+            name => `${name} `
+        )}
+    </div>
+)
 
-    render() {
-        const {authors} = this.props
-
-        return (
-            <div className="book-authors">
-                {authors.map(
-                    name => `${name} `
-                )}
-            </div>
-        )
-    }
+Authors.propTypes = {
+    authors: PropTypes.array.isRequired
 }
 
 export default Authors
