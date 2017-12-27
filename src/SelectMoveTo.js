@@ -20,6 +20,8 @@ class SelectMoveTo extends Component {
                 if (item.id === book.id)  {
                     current = item.shelf
                     break
+                } else {
+                    current = "none"
                 }
             }
         }
@@ -27,10 +29,10 @@ class SelectMoveTo extends Component {
         return (
             <select
                 onChange={(event) => onMoveBook(book, event.target.value)}
-                value="none"
+                defaultValue={ current }
             >
                 <option value="none" disabled>Move to...</option>
-                {Shelfs.filter((shelf) => shelf.type !== current).map(shelf => (
+                {Shelfs.map(shelf => (
                     <option
                         key={shelf.id}
                         value={shelf.type}
